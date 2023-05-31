@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Mobile Website</title>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+  <div data-role="page" id="home">
+    <div data-role="header" data-position="fixed">
+      <h1>Welcome to SMT. Kashibai Nawale College of Engineering Pune</h1>
+    </div>
+    <div data-role="content">
+      <h2></h2>
+      <p></p>
+      
+      <div class="ui-grid-a">
+        <div class="ui-block-a"><a href="#exam" data-role="button">Exam</a></div>
+        <div class="ui-block-b"><a href="#admission" data-role="button">Admission</a></div>
+      </div>
+      
+      <form id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="nameInput">
+        <label for="email">Email:</label>
+        <input type="email" id="emailInput">
+        <fieldset data-role="controlgroup">
+          <legend>Select your education:</legend>
+          <input type="checkbox" name="education" id="be" value="BE">
+          <label for="be">BE</label>
+          <input type="checkbox" name="education" id="mbbs" value="MBBS">
+          <label for="mbbs">MBBS</label>
+          <input type="checkbox" name="education" id="llb" value="LLB">
+          <label for="llb">LLB</label>
+        </fieldset>
+        <fieldset data-role="controlgroup">
+          <legend>Select your gender:</legend>
+          <input type="radio" name="gender" id="male" value="male">
+          <label for="male">Male</label>
+          <input type="radio" name="gender" id="female" value="female">
+          <label for="female">Female</label>
+        </fieldset>
+        <input type="submit" value="Submit" data-theme="b">
+      </form>
+      
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#homea" class="ui-btn-active">List</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+      <h4>&copy; all rights are reserved by Hitesh Nichit</h4>
+    </div>
+  </div>
+
+  <div data-role="page" id="homea">
+    <div data-role="header" data-position="fixed">
+      <a href="#home" data-icon="home" data-iconpos="notext">List</a>
+      <h1>hello</h1>
+    </div>
+    <ul data-role="listview">
+      <li><a href="#" onclick="generateImage()">Messi</a></li>
+      <li><a href="#" onclick="generateImage()">Ronaldo</a></li>
+      <li><a href="#" onclick="generateImage()">Neymar</a></li>
+    </ul>
+    <div data-role="footer" data-position="fixed">
+      <h4>&copy; all rights are reserved by Hitesh Nichit</h4>
+    </div>
+  </div>
+
+  <div data-role="page" id="about">
+    <div data-role="header" data-position="fixed">
+      <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+      <h1>About</h1>
+    </div>
+    <div data-role="content">
+      <p class="fade-in">This is the About page.</p>
+    </div>
+    <div data-role="footer" data-position="fixed">
+      <h4>&copy; all rights are reserved by Hitesh Nichit</h4>
+    </div>
+  </div>
+
+  <div data-role="page" id="contact">
+    <div data-role="header" data-position="fixed">
+      <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+      <h1>Contact</h1>
+    </div>
+    <div data-role="content">
+      <p>This is the Contact page.</p>
+      <div id="displayContact">
+        <h2>Name: <span id="contactName"></span></h2>
+        <h2>Email: <span id="contactEmail"></span></h2>
+        <h2>Education: <span id="contactEducation"></span></h2>
+        <h2>Gender: <span id="contactGender"></span></h2>
+      </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+      <h4>&copy; all rights are reserved by Hitesh Nichit</h4>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#contactForm').submit(function(event) {
+        event.preventDefault(); 
+
+        var name = $('#nameInput').val();
+        var email = $('#emailInput').val();
+        var education = $('input[name="education"]:checked').map(function() {
+          return $(this).val();
+        }).get();
+        var gender = $('input[name="gender"]:checked').val();
+
+        $('#contactName').text(name);
+        $('#contactEmail').text(email);
+        $('#contactEducation').text(education.join(', '));
+        $('#contactGender').text(gender);
+
+        $.mobile.changePage("#contact");
+      });
+
+      $('.fade-in').hide().fadeIn(1500);
+    });
+
+    function generateImage() {
+      var imageUrl = 'LM.jpg'; 
+      var image = $('<img>').attr('src', imageUrl);
+      $('#homea').find('ul').append($('<li>').append(image));
+      $('#homea ul').listview('refresh');
+    }
+  </script>
+</body>
+</html>
